@@ -1,0 +1,27 @@
+library("UsingR"); data("diamond")
+library(ggplot2)
+
+g= ggplot(diamond, aes(x=carat, y=price))
+g= g+ xlab("Mass (carats)")
+g= g+ ylab("Price (SGD/S$)")
+
+g= g+ geom_point(size=6, colour="black", alpha=0.2)
+g= g+ geom_point(size=5, colour="blue", alpha=0.2)
+g= g+ geom_smooth(method = "lm", colour="black")
+g
+
+# fitting the model
+fit <- lm(price ~ carat, data = diamond)
+coef(fit)
+
+# intercept on more interprettable scale
+fit2 <- lm(price~ I(carat-mean(carat)), data = diamond)
+coef(fit2)
+# so the average diamond is 500.083
+
+fit3 <- lm(price~ I(carat*10), data = diamond)
+coef(fit3)
+
+# predicting from data
+newx <- c(0.16, 0.24, 0.37)
+predict(fit, newdata = data.frame(carat=newx))
