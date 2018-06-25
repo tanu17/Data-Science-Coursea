@@ -1,6 +1,8 @@
 # Computing slopes explicitly 
 # Karolina Sikorska and Paul Eilers, 2012
 
+# faster than lsfir model
+
 # Simulate data
 set.seed(2012)
 n = 10000
@@ -11,6 +13,7 @@ y = rnorm(n)
 # Do the computations
 t0 = proc.time()[1]
 
+# explicit caculation of slope faster than scale()
 beta = rep(0, m)
 yc = y - mean(y)
 for(i in 1:m){
