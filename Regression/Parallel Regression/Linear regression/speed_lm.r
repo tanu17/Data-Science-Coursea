@@ -18,11 +18,13 @@ beta = rep(0, m)
 # initializing beta vector as (0,0,0,0,0...)
 
 for(i in 1:m){
-  # generating a linear mode based upon one SNPs having n states. Linear model provides intercept and slpoe
+  # generating a linear mode based upon one SNPs having n states. Linear model provides intercept and slope
   mod = lm(y ~ S[,i])
   beta[i] = mod$coeff[2]
 }
+
 # Report time
 t1 = proc.time()[1] - t0
 msip = 1e-06 * n * m / t1
 cat(sprintf("Speed: %2.1f Msips\n", msip))
+beta
