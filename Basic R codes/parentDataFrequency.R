@@ -9,5 +9,3 @@ g <- g + geom_point(colour="grey50", aes(size = freq+1, show_guide = FALSE))
 g <- g + geom_point(aes(colour=freq, size = freq))
 g <- g + scale_colour_gradient(low = "lightblue", high="white")                    
 g
-
-
