@@ -11,6 +11,8 @@ y = rnorm(n)
 # Do the computations
 t0 = proc.time()[1]
 
+# drop of speed as scale is a slower function than explicitly calculating slope
+
 yc = y - mean(y)
 Sc = scale(S, scale = F)
 S2 = colSums(Sc ^ 2 )
