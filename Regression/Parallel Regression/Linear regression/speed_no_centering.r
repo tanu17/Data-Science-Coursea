@@ -1,6 +1,8 @@
-# Semi-parallel computations, no centering
+0# Semi-parallel computations, no centering
 # Karolina Sikorska and Paul Eilers, 2012
 
+# fastest
+# uses the fact that E((X-mu)^2) = E(X^2) - n*mu^2
 # Simulate data
 set.seed(2012)
 n = 10000
