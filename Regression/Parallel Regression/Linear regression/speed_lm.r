@@ -1,6 +1,9 @@
 # Check the speed of lm() in loop
 # Karolina Sikorska and Paul Eilers, 2012
 
+# 1st Model Simulated. Has slowest speed.
+
+
 # Simulate data
 set.seed(2012)
 n = 10000
