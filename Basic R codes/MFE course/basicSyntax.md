@@ -1,6 +1,6 @@
 # Data Types:
-character:  "Shantanu", "A"
-numeric: 4.52344332, pi , 3.52342432...
+character:  "Shantanu", "A" \n
+numeric: 4.52344332, pi , 3.52342432...\n
 // R doesnt have long and various other distinction beause it doesnt have restriction on size
 integer
 logical: TRUE, FALSE
