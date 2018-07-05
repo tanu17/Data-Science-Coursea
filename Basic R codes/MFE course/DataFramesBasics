@@ -1,0 +1,13 @@
+Tesla <- read.csv("C:/Users/User/Downloads/TSLA.csv")
+class(Tesla)
+//returns "data.frame"
+view(Tesla)
+min(Tesla[["High"]]
+sd(Tesla[["Open"]]
+plot(Tesla$Open)
+nrow(Tesla)
+ncol(Tesla)
+colnames(Tesla)       //names(Tesla) is the same
+rownames(Tesla)
+str(Tesla)
+//gives summary of the data
