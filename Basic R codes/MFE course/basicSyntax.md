@@ -1,8 +1,8 @@
 # Data Types:
-character:  "Shantanu", "A" \n
-numeric: 4.52344332, pi , 3.52342432...\n
-// R doesnt have long and various other distinction beause it doesnt have restriction on size
-integer
+
+character:  "Shantanu", "A" 
+numeric: 4.52344332, pi , 3.52342432...
+    R doesnt have long and various other distinction beause it doesnt have restriction on size integer
 logical: TRUE, FALSE
 complex: 3+4i
 
@@ -12,8 +12,9 @@ complex: 3+4i
   num <- 2
   vetory <- (0,0,0)
 
-    The operators <- and = assign into the environment in which they are evaluated. The operator <- can be used anywhere, 
-    whereas the operator = is only allowed at the top level (e.g., in the complete expression typed at the command prompt) 
+    The operators <- and = assign into the environment in which they are evaluated.
+    The operator <- can be used anywhere, whereas the operator = is only allowed at
+    the top level (e.g., in the complete expression typed at the command prompt) 
     or as one of the subexpressions in a braced list of expressions.
 
 
@@ -32,3 +33,5 @@ complex: 3+4i
   time <- Sys.time()
   class(time)         returns "POSIXct"  =>>POSIX is international standard for measuring time
   
+/# : comments
+== : comparison
