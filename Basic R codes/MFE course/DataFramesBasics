@@ -16,4 +16,7 @@ str(Tesla)
 
 plot(Tesla$Date, Telsa$Close)
 
+Tesla[order(Tesla$Close, decreasing = TRUE),]
 
+save() // save the environment and variables from memory
+save(Tesla, file="C/Desktop/1.RData")
