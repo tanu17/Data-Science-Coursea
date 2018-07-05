@@ -1,0 +1,31 @@
+seq1<- 1:20
+seq(3,15,by=3)
+ceiling(), floor(), round() 
+ruinf //random uniform sequence runif(numbers to generate, min value, max value)
+
+
+// R processes building funtions performs vector by vector
+ceiling(runif(11)*20)
+seq1 > 10
+  //returns vetor of true and false 
+ seq1[rep(c(TRUE,FALSE),20]
+  // returns 1 3 5 7 9 ...
+  
+q <- rnorm(1000)
+hist(q)
+w <- q[ q>1]
+hist(w)
+w <- q[q>1 | q<-1]
+hist(w)
+w <- q[ length(q)/2 : length(q) ]
+
+mat <- matrix(0,1,4)
+suit <- c("h","c","d","s")
+mat[1, ] <-suit
+mat[1, 4:1] <- suit
+seq1[ seq1 >12] <- 0
+
+sort(runif(10), decreasing= TRUE)
+order( runif(10, decreasing = TRUE)
+
+sort(a) is equivalent to a[order(a)]
