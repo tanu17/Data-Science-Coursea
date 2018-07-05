@@ -1,3 +1,5 @@
+https://query1.finance.yahoo.com/v7/finance/download/TSLA?period1=1528203740&period2=1530795740&interval=1d&events=history&crumb=aFUjSRg.U87
+
 Tesla <- read.csv("C:/Users/User/Downloads/TSLA.csv")
 class(Tesla)
 //returns "data.frame"
@@ -11,3 +13,7 @@ colnames(Tesla)       //names(Tesla) is the same
 rownames(Tesla)
 str(Tesla)
 //gives summary of the data
+
+plot(Tesla$Date, Telsa$Close)
+
+
