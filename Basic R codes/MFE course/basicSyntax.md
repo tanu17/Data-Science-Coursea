@@ -70,6 +70,9 @@ complex: 3+4i<br /><br />
    cards<- paste0(c("Spade","Clubs,"Hearts","Diamonds"), sort(rep(1:13, 4))), "J", "j"))<br/>
    length(cards)<br/>
    
+    Matrix multiplication
+        mat1 %*% mat2
+   
 # List
    x <- list( "shan", 3, FALSE, 3+8i, 4)
    x[[1]]<br/>
@@ -79,5 +82,3 @@ complex: 3+4i<br /><br />
    lst[["a"]]<br/>
    lst$a<br/>
    x[[1]]<br/>
-   
-   
