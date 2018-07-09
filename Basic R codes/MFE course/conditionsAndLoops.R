@@ -47,3 +47,25 @@ for(i in 1:m){
 }
 print(all(as.vector(m1%*%m2 == m3)))  # TEST1
 print(all(abs(as.vector(m1%*%m2 - m3))< 1e-8))	# TEST2
+
+#
+# While Loop
+#
+i=142
+while (i>100){
+  print(i)
+  i=i-1
+  }
+
+#
+# Repeat
+#
+
+repeat{
+  ...
+  break
+  ...
+}
+
+
+
