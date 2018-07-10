@@ -3,6 +3,7 @@
 
 # Simulate data
 set.seed(2013)
+#seed used to reproduce the random results
 n = 10000
 m = 1000
 S = matrix(2 * runif(n * m), n, m)
