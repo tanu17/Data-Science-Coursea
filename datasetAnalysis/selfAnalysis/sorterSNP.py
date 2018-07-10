@@ -28,3 +28,10 @@ snp_dict_file=open("SNPdictionary.dat", "wb")
 pickle.dump(snp_dict,snp_dict_file)
 snp_dict_file.close()
 print("Done with exporting")
+
+"""
+import pickle
+import matplotlib.pyplot as plt
+f= open("SNPdictionary.dat", "rb+")
+dict1=pickle.load(f)
+"""
