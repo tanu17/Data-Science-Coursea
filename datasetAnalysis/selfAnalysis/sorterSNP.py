@@ -4,6 +4,7 @@ for l in f:
 	print (l)
 """
 import csv
+import pickle
 
 c= csv.reader(open('covariates.csv'), delimiter=',')
 
@@ -18,7 +19,12 @@ snp_id=snp_file.readline().strip().split(" ")
 snp_lines=snp_file.readlines()
 snp_dict={}
 for i in range(len(snp_id)):
+	print(i)
 	snp_dict["snp"+str(i+1)]=[]
 	for line in snp_lines:
 		snp_dict["snp"+str(i+1)].append(line.strip().split(" ")[i])
-print(snp_dict)
+
+snp_dict_file=open("SNPdictionary.dat", "wb")
+pickle.dump(snp_dict,snp_dict_file)
+snp_dict_file.close()
+print("Done with exporting")
