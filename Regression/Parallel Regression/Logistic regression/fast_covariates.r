@@ -18,18 +18,23 @@ mod0 = glm( y ~ X, family = binomial("logit"))
 p = mod0$fitted
 w = p * (1 - p)
 z = log(p / (1 - p)) + (y - p) / (p * (1 - p))
+
+# computing z*
 xtw = t(X * w)
 U1 = xtw %*% z
-
 U2 = solve(xtw %*% X, U1)
 ztr = z  - X %*% U2
+
+# computing s*
 U3 = xtw %*% S
 U4 = solve(xtw %*% X, U3)
 Str = S - X %*% U4
+
 Str2 = colSums(w * Str^2)
 b = crossprod(ztr * w, Str)/Str2
 err = sqrt(1/ Str2)
 pval = 2 * pnorm(-abs(b / err))
+
 # Report time
 t1 = proc.time()[1] - t0
 msip = 1e-06 * n * m / t1
@@ -50,7 +55,3 @@ for(i in 1:m){
 t3 = proc.time()[1] - t2
 msip1 = 1e-06 * n * m / t3
 cat(sprintf("Speed: %2.1f Msips\n", msip1))
-
-
-
-
