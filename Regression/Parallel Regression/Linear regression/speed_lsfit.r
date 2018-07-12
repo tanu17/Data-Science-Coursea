@@ -1,7 +1,7 @@
 # Check the speed of lsfit() in loop
 # Karolina Sikorska and Paul Eilers, 2012
 
-# Least Square is faster than linear modela
+# Least Square is faster than linear model
 
 # Simulate data
 # set.seed() is a PRG used to provide reproducable random data points
