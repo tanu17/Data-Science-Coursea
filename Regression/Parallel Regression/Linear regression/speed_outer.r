@@ -14,6 +14,8 @@ t0 = proc.time()[1]
 yc = y - mean(y)
 s1 = colSums(S)
 means = s1/n
+# outer refers to outer product of tensors
+# outer(A,B) = A * transpose(B)
 e = rep(1, n)
 Sc = (S -outer(e, means))
 b = crossprod(yc, Sc)/colSums(Sc ^ 2)
