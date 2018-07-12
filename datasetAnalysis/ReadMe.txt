@@ -1,5 +1,4 @@
-logisticRegress_importFile_2.r: derived from fast_covariates.r. PGP sample data rather than simulated data are imported as input data.
-usage: Rscript logisticRegress_importFile.r
+Regression.r: derived from fast_covariates.r. PGP sample data rather than simulated data are imported as input data.
 
 input:
 	1. covariates.csv (individual per row): col1 -- PGP human id 
