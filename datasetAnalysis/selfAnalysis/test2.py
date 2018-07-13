@@ -1,8 +1,5 @@
 import csv
 import pickle
-import matplotlib.pyplot as plt
-import numpy as np
-
 
 c= csv.reader(open('covariates.csv'), delimiter=',')
 yes_list=[]
@@ -17,8 +14,8 @@ for i in range(len(condition_list)):
 		no_list.append(i)
 	else:
 		yes_list.append(i)
-print(yes_list)
-print(no_list)
+#print(yes_list)
+#print(no_list)
 
 f= open("SNPdictionary.dat", "rb+")
 dict1=pickle.load(f)
@@ -34,6 +31,25 @@ for key in dict1.keys():
 
 snp_yes_file=open("PositiveDictionary.dat", "wb")
 snp_no_file=open("NegativeDictionary.dat", "wb")
+
+diff_dict={}
+for key in dict1.keys():
+	x=abs(yes_dict[key]- no_dict[key])
+	if x>10:
+		diff_dict[key]=x
+print(diff_dict)
+
+f2=open("diff.csv","w+")
+columnTitleRow = "name, value\n"
+f2.write(columnTitleRow)
+d=list(diff_dict.keys())
+for key in d:
+	name = key
+	value = diff_dict[key]
+	row = name + "," + str(value) + "\n"
+	f2.write(row)
+f2.close()
+
 pickle.dump(yes_dict,snp_yes_file)
 pickle.dump(no_dict, snp_no_file)
 snp_yes_file.close()
