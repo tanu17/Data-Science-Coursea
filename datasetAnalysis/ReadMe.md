@@ -10,7 +10,8 @@ input:
 	P.S. missing values in col3-5 are imputed by mean
 
 	2. snpMat.txt: matrix of genotypes derived from vcf files by buildMat.py (each SNP is label as chromosome_position)
-	Each row presents an individual's genotype information: 1 means that the individual has the corresponding SNP, 0 otherwise. The order of individuals is the same as that in covariates.csv
+	Each row presents an individual's genotype information: 1 means that the individual has the corresponding SNP,
+	0 otherwise. The order of individuals is the same as that in covariates.csv
 	P.S. original vcf files could be found under the directory of vcf/
 
 
