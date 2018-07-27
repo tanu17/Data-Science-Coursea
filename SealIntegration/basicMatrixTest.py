@@ -2,8 +2,8 @@ import random
 import time
 import random
 import threading
-#import seal
-#from seal import ChooserEvaluator, Ciphertext, Decryptor, Encryptor, EncryptionParameteEvaluator, IntegerEncoder, FractionalEncoder, KeyGenerator, MemoryPoolHandle, Plaintext, SEALContext, EvaluationKeys, GaloisKeys, PolyCRTBuilder, ChooserEncoder, ChooserEvaluator, ChooserPoly
+import seal
+from seal import ChooserEvaluator, Ciphertext, Decryptor, Encryptor, EncryptionParameteEvaluator, IntegerEncoder, FractionalEncoder, KeyGenerator, MemoryPoolHandle, Plaintext, SEALContext, EvaluationKeys, GaloisKeys, PolyCRTBuilder, ChooserEncoder, ChooserEvaluator, ChooserPoly
 
 A=[]
 A_cipherObject=[]
