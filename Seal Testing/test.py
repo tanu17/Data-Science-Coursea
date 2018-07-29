@@ -75,3 +75,20 @@ for i in range(len(A)):
 	A_cipherObject.append(Ciphertext())
 	B.append(encryptor.encrypt(A_plain[i],A_cipherObject[i]))
 	print("Noise budget of "+ str(i)+str((decryptor.invariant_noise_budget(A_cipherObject[i]))) + " bits")
+
+B=chunk(B)
+C=B
+#shallow copy
+
+# partial pivoting
+for i in range(n,1,-1):
+	evaluator.negate(C[i-1][1])
+	evaluator.add(C[i-1][1], C[i][1])
+	plain_result = Plaintext()
+	decryptor.decrypt(C[i-1][1], plain_result)
+	if (int(encoder.decode_int32(plain_result))>0):
+		for j in range(1,8,-1):
+			B[i-1][j],B[i][j]=B[i][j],B[i-1][j]
+print(B)
+del(C)
+D=B
