@@ -51,7 +51,8 @@ Result_crypt=[]
 for i in range(16):
 	A.append(random.randint(0,64))
 A+=[0]*16
-for i in range(16,2*len(A),4):
+print(A)
+for i in range(16,len(A)-1,4):
 	A[i]=1
 
 parms = EncryptionParameters()
@@ -70,17 +71,7 @@ evaluator = Evaluator(context)
 decryptor = Decryptor(context, secret_key)
 
 for i in range(len(A)):
-	A_plain[i]=encoder.encode(A[i])
-print("Encoded Matrix: "+ str(A)+ " as polynomial" + str(A_plain))
-
-for i in range(len(A)):
+	A_plain.append(encoder.encode(A[i]))
 	A_cipherObject.append(Ciphertext())
-	B=[]
-for i in range(len(A)):
-	B.append(encrpytor.encrypt(A_plain[i],A_cipherObject[i]))
+	B.append(encryptor.encrypt(A_plain[i],A_cipherObject[i]))
 	print("Noise budget of "+ str(i)+str((decryptor.invariant_noise_budget(A_cipherObject[i]))) + " bits")
-
-for i in range(len(A)):
-	a=Ciphertext()
-	encryptor.encrypt(encoder.encode(1),a)
-	Result_crypt.append(a)
