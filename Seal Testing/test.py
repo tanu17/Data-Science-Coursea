@@ -29,6 +29,7 @@ A=[]
 A_plain=[]
 A_cipherObject=[]
 B=[]
+Result_crypt=[]
 
 for i in range(16):
 	A.append(random.randint(0,64))
@@ -58,11 +59,10 @@ print("Encoded Matrix: "+ str(A)+ " as polynomial" + str(A_plain))
 for i in range(len(A)):
 	A_cipherObject.append(Ciphertext())
 	B=[]
-	for i in range(len(A)):
-		B.append(encrpytor.encrypt(A_plain[i],A_cipherObject[i]))
-		print("Noise budget of "+ str(i)+str((decryptor.invariant_noise_budget(A_cipherObject[i]))) + " bits")
+for i in range(len(A)):
+	B.append(encrpytor.encrypt(A_plain[i],A_cipherObject[i]))
+	print("Noise budget of "+ str(i)+str((decryptor.invariant_noise_budget(A_cipherObject[i]))) + " bits")
 
-	Result_crypt=[]
 for i in range(len(A)):
 	a=Ciphertext()
 	encryptor.encrypt(encoder.encode(1),a)
