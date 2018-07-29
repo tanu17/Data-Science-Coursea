@@ -37,7 +37,7 @@ def print_parameters(context):
     print("| noise_standard_deviation: " + (str)(context.noise_standard_deviation()))
 
 def chunk(T):
-	B=[]
+	B=list()
 	for i in range(0,len(T),4):
 		B.append(T[i:i+4])
 	return(B)
@@ -52,7 +52,7 @@ for i in range(16):
 	A.append(random.randint(0,64))
 A+=[0]*16
 print(A)
-for i in range(16,len(A)-1,4):
+for i in range(16,len(A),5):
 	A[i]=1
 
 parms = EncryptionParameters()
@@ -73,22 +73,28 @@ decryptor = Decryptor(context, secret_key)
 for i in range(len(A)):
 	A_plain.append(encoder.encode(A[i]))
 	A_cipherObject.append(Ciphertext())
-	B.append(encryptor.encrypt(A_plain[i],A_cipherObject[i]))
-	print("Noise budget of "+ str(i)+str((decryptor.invariant_noise_budget(A_cipherObject[i]))) + " bits")
+	encryptor.encrypt(A_plain[i],A_cipherObject[i])
+	print("Noise budget of "+ str(i)+" "+str((decryptor.invariant_noise_budget(A_cipherObject[i]))) + " bits")
 
-B=chunk(B)
-C=B
+
+A_cipherObject=chunk(A_cipherObject)
+C=A_cipherObject
+
 #shallow copy
 
 # partial pivoting
-for i in range(n,1,-1):
+i=4
+while (i>1):
 	evaluator.negate(C[i-1][1])
 	evaluator.add(C[i-1][1], C[i][1])
 	plain_result = Plaintext()
 	decryptor.decrypt(C[i-1][1], plain_result)
 	if (int(encoder.decode_int32(plain_result))>0):
-		for j in range(1,8,-1):
-			B[i-1][j],B[i][j]=B[i][j],B[i-1][j]
-print(B)
+		for j in range(1,9):
+			A_cipherObject[i-1][j],A_cipherObject[i][j]=A_cipherObject[i][j],A_cipherObject[i-1][j]
+	i-=1
 del(C)
-D=B
+
+D=A_cipherObject
+
+# reducing to diagonal matr
