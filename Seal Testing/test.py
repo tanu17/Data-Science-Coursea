@@ -1,9 +1,26 @@
 import random
 import time
-import random
+import pickle
 import threading
 import seal
-from seal import ChooserEvaluator, Ciphertext, Decryptor, Encryptor, EncryptionParameteEvaluator, IntegerEncoder, FractionalEncoder, KeyGenerator, MemoryPoolHandle, Plaintext, SEALContext, EvaluationKeys, GaloisKeys, PolyCRTBuilder, ChooserEncoder, ChooserEvaluator, ChooserPoly
+from seal import ChooserEvaluator, \
+	Ciphertext, \
+	Decryptor, \
+	Encryptor, \
+	EncryptionParameters, \
+	Evaluator, \
+	IntegerEncoder, \
+	FractionalEncoder, \
+	KeyGenerator, \
+	MemoryPoolHandle, \
+	Plaintext, \
+	SEALContext, \
+	EvaluationKeys, \
+	GaloisKeys, \
+	PolyCRTBuilder, \
+	ChooserEncoder, \
+	ChooserEvaluator, \
+	ChooserPoly
 
 def print_example_banner(title, ch='*', length=78):
     spaced_text = ' %s ' % title
