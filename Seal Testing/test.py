@@ -97,4 +97,18 @@ del(C)
 
 D=A_cipherObject
 
-# reducing to diagonal matr
+# reducing to diagnol matrix
+for i in range(1,5):
+	for j in range (1,2*4):
+		if (j!=i):
+			X=Result_crypt[i][i]
+			Y=Ciphertext()
+			plain_result = Plaintext()
+			decryptor.decrypt(X, plain_result)
+			encryptor.encrpyt(encoder.encode(1/int(encoder.decode_int32(plain_result))),Y)
+			for k in range(1,9):
+				evaluator.multiply(Y,D[i][j])
+				evaluator.negate(Y)
+				evaluator.add(A_cipherObject[i][j],Y)
+
+# reducing to unit matrix
