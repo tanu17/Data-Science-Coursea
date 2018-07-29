@@ -112,3 +112,11 @@ for i in range(1,5):
 				evaluator.add(A_cipherObject[i][j],Y)
 
 # reducing to unit matrix
+for i in range (1,9):
+	d=A_cipherObject[i][i]
+	Y=Ciphertext()
+	plain_result = Plaintext()
+	decryptor.decrypt(X, plain_result)
+	encryptor.encrpyt(encoder.encode(1/int(encoder.decode_int32(plain_result))),Y)
+	for j in range (1,9):
+		A_cipherObject[i][j]=evaluator.multiply(A_cipherObject[i][j],Y)
