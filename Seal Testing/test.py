@@ -63,6 +63,7 @@ parms.set_plain_modulus(1 << 8)
 context = SEALContext(parms)
 print_parameters(context)
 encoder = IntegerEncoder(context.plain_modulus())
+encoderF =FractionalEncoder(context.plain_modulus(), context.poly_modulus(), 64, 32, 3)
 keygen = KeyGenerator(context)
 public_key = keygen.public_key()
 secret_key = keygen.secret_key()
@@ -76,47 +77,40 @@ for i in range(len(A)):
 	encryptor.encrypt(A_plain[i],A_cipherObject[i])
 	print("Noise budget of "+ str(i)+" "+str((decryptor.invariant_noise_budget(A_cipherObject[i]))) + " bits")
 
-
 A_cipherObject=chunk(A_cipherObject)
 C=A_cipherObject
-
 #shallow copy
 
 # partial pivoting
-i=4
-while (i>1):
-	evaluator.negate(C[i-1][1])
-	evaluator.add(C[i-1][1], C[i][1])
+for i in range(3,-1,-1):
+	evaluator.negate(C[i][0])
+	evaluator.add(C[i][0], C[i+1][0])
 	plain_result = Plaintext()
-	decryptor.decrypt(C[i-1][1], plain_result)
+	decryptor.decrypt(C[i][0], plain_result)
 	if (int(encoder.decode_int32(plain_result))>0):
-		for j in range(1,9):
-			A_cipherObject[i-1][j],A_cipherObject[i][j]=A_cipherObject[i][j],A_cipherObject[i-1][j]
-	i-=1
-del(C)
+		for j in range(8):
+			A_cipherObject[i][j],A_cipherObject[i+1][j]=A_cipherObject[i+1][j],A_cipherObject[i][j]
 
+for i in range(4):
+	A_cipherObject[i]+=A_cipherObject[i+4]
+A_cipherObject=A_cipherObject[:4]
 D=A_cipherObject
-
+#shallow copy
+print(len(D))
+print(len(D[0]))
 # reducing to diagnol matrix
-for i in range(1,5):
-	for j in range (1,2*4):
+for i in range(4):
+	for j in range (8):
 		if (j!=i):
-			X=Result_crypt[i][i]
-			Y=Ciphertext()
 			plain_result = Plaintext()
+			X=D[i][i]
 			decryptor.decrypt(X, plain_result)
-			encryptor.encrpyt(encoder.encode(1/int(encoder.decode_int32(plain_result))),Y)
-			for k in range(1,9):
-				evaluator.multiply(Y,D[i][j])
+			E=1/int(encoder.decode_int32(plain_result))
+			Y=Ciphertext(parms)
+			R=encoderF.encode(E)
+			encryptor.encrypt(R,Y)
+			evaluator.multiply(Y,D[j][i])
+			for k in range(8):
+				evaluator.multiply(Y,D[i][k])
 				evaluator.negate(Y)
-				evaluator.add(A_cipherObject[i][j],Y)
-
-# reducing to unit matrix
-for i in range (1,9):
-	d=A_cipherObject[i][i]
-	Y=Ciphertext()
-	plain_result = Plaintext()
-	decryptor.decrypt(X, plain_result)
-	encryptor.encrpyt(encoder.encode(1/int(encoder.decode_int32(plain_result))),Y)
-	for j in range (1,9):
-		A_cipherObject[i][j]=evaluator.multiply(A_cipherObject[i][j],Y)
+				evaluator.add(A_cipherObject[j][k],Y)
