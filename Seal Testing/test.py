@@ -50,9 +50,9 @@ Result_crypt=[]
 
 for i in range(16):
 	A.append(random.randint(0,64))
-A+=[0]*16
+A+=[0]*(100-16)
 print(A)
-for i in range(16,len(A),5):
+for i in range(16,32,5):
 	A[i]=1
 
 parms = EncryptionParameters()
@@ -89,15 +89,11 @@ for i in range(3,-1,-1):
 	decryptor.decrypt(C[i][0], plain_result)
 	if (int(encoder.decode_int32(plain_result))>0):
 		for j in range(8):
-			A_cipherObject[i][j],A_cipherObject[i+1][j]=A_cipherObject[i+1][j],A_cipherObject[i][j]
+# add code to combine appended matrix and normal matrix together
 
-for i in range(4):
-	A_cipherObject[i]+=A_cipherObject[i+4]
-A_cipherObject=A_cipherObject[:4]
 D=A_cipherObject
 #shallow copy
-print(len(D))
-print(len(D[0]))
+
 # reducing to diagnol matrix
 for i in range(4):
 	for j in range (8):
@@ -114,3 +110,13 @@ for i in range(4):
 				evaluator.multiply(Y,D[i][k])
 				evaluator.negate(Y)
 				evaluator.add(A_cipherObject[j][k],Y)
+				
+# reducing to unit matrix
+for i in range (8):
+	d=A_cipherObject[i][i]
+	Y=Ciphertext()
+	plain_result = Plaintext()
+	decryptor.decrypt(X, plain_result)
+	encryptor.encrpyt(encoder.encode(1/int(encoder.decode_int32(plain_result))),Y)
+	for j in range (8):
+		A_cipherObject[i][j]=evaluator.multiply(A_cipherObject[i][j],Y)
