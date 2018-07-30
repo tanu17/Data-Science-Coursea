@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-	int i, j, k, n,s;
+	int i, j, k, n, s;
 	float a[10][10] = { 0 }, d;
 	cout << "No of equations ? ";
 	cin >> n;
@@ -40,12 +40,21 @@ int main()
 	}
 	/********** reducing to diagonal  matrix ***********/
 
+	for (j = 1; j <= 2*n; j++) {
+		for (i = 1; i <= n; i++) {
+			cout << a[j][i] << "  ";
+		}
+	}
 	for (i = 1; i <= n; i++)
 	{
+		//cout<< "i: :" << " ";
+		//cout << i << endl;
 		for (j = 1; j <= n * 2; j++)
 			if (j != i)
 			{
 				d = a[j][i] / a[i][i];
+				//cout << "j :" << " ";
+				//cout << j << endl;
 				for (k = 1; k <= n * 2; k++)
 					a[j][k] -= a[i][k] * d;
 			}
@@ -65,6 +74,7 @@ int main()
 			cout << a[i][j] << "    ";
 		cout << endl;
 	}
-	getch();
+	int ch = std::cin.get();
+	cin >> s;
 	return 0;
 }
