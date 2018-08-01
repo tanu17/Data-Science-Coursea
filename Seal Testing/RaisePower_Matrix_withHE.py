@@ -1,6 +1,6 @@
 import numpy 
-
 import random
+
 import time
 import random
 import threading
@@ -49,7 +49,9 @@ for i in range(n):
 	for j in range(n):
 		encrypted _data1= Ciphertext()
 		encrypted _data2= Ciphertext()
-		encryptor.encrypt(encoder.encode(random.randint(0,10)), encrypted_data1)
+		ran=random.randint(0,10)
+		print(ran)
+		encryptor.encrypt(encoder.encode(ran), encrypted_data1)
 		encryptor.encrypt(encoder.encode(0), encrypted_data2)
 		a.append(encrypted_data1)
 		x.append(encrypted_data2)
@@ -67,7 +69,7 @@ def dot_vector(r,d):
 	for i in range(l):
 		# multiply/binary operation between vectors
 		evaluator.multiply(r[i], d[i])
-		evaluator.multiply(t, r[i])
+		evaluator.add(t, r[i])
 	return(t)
 
 def raise_power(M):
@@ -76,7 +78,36 @@ def raise_power(M):
 			(X[i])[j]=dot_vector(M[i], tA[j])
 	return(X)
 
+def trace(M):
+	for i in range(1,n):
+		evaluator.add(M[0][0], M[i][i])
+	return (M[0][0])
+
 print(A)
 sq=(raise_power(A))
 print(sq)
 print(raise_power(sq)) 
+
+"""
+class X():
+	pass
+s=X()
+setattr(s, "s1", 1)
+setattr(s, "s2", 3)
+
+print(dir(s))
+print(s.s1)
+print(s.s2)
+"""
+
+matrixPower_vector=[A]
+transpose_vector=[trace(A)]
+for i in range(1,n-1):
+	matrixPower_vector.append(raise_power(matrixPower_vector[i-1]))
+	transpose_vector.append(trace(matrixPower_vector[i]))
+
+for i in range(n):
+	for j in range(n):
+		plain_result = Plaintext()
+		decryptor.decrypt(matrixPower_vector[0][i][j], plain_result)
+		print(encoder.decode_int32(plain_result))
