@@ -58,30 +58,19 @@ for i in range(n):
 	A.append(a)
 	X.append(x)
 
-
-W=Ciphertext(A[0][0])
-evaluator.negate(W)
-pa=Plaintext()
-pw=Plaintext()
-decryptor.decrypt(W, pw)
-decryptor.decrypt(A[0][0], pa)
-print(encoder.decode_int32(pa))
-print(encoder.decode_int32(pw))
-
 print("0 encoding: ", encoder.encode(0).to_string())
 #tA_=numpy.transpose(A)
 tA=[list(tup) for tup in zip(*A)]
 
 def dot_vector(r,d,i,j):
 	print("+"*30+"\n")
-	print_plain(X)
 	l=len(r)
 	for b in range(l):
 		# multiply/binary operation between vectors
 		cVec=Ciphertext()
 		evaluator.multiply( r[b], d[b], cVec)
 		evaluator.add(X[i][j], cVec)
-	print("Noise budget "+str(i)+" "+str(j)+" "+ 	str(decryptor.invariant_noise_budget(X[i][j])))
+	print("Noise budget "+str(i)+" "+str(j)+" "+ str(decryptor.invariant_noise_budget(X[i][j])))
 	print_plain(X)
 
 
@@ -94,11 +83,10 @@ def raise_power(M):
 	return(X)
 
 def trace(M):
-	e=copy.copy(M[0][0])
-	for i in range(1,n):
-		evaluator.add(M[0][0], M[i][i])
-#	M[0][0],e=e,M[0][0]
-	return (M[0][0],e)
+	e=Ciphertext()
+	for i in range(0,n):
+		evaluator.add(M[i][i],e)
+	return (e)
 
 def print_plain(D):
 	for x in D:
@@ -108,25 +96,8 @@ def print_plain(D):
 			print(encoder.decode_int32(p))
 
 matrixPower_vector=[A]
-#trace_vector,k=trace(A)
-matrixPower_vector.append(raise_power(A))
-#A[0][0]=k
-for i in range(n):
-	for j in range(n):
-		p=Plaintext()
-		decryptor.decrypt(matrixPower_vector[1][i][j], p)
-		print(encoder.decode_int32(p))
-"""
-p=Plaintext()
-decryptor.decrypt(trace_vector, p)
-print(encoder.decode_int32(p))	
-
+trace_vector=[trace(A)]
 for i in range(1,n-1):
 	matrixPower_vector.append(raise_power(matrixPower_vector[i-1]))
-	transpose_vector.append(trace(matrixPower_vector[i]))
-"""
-for i in range(n):
-	for j in range(n):
-		plain_result = Plaintext()
-		decryptor.decrypt(A[i][j], plain_result)
-		print(encoder.decode_int32(plain_result))
+	trace_vector.append(trace(matrixPower_vector[i]))
+print_plain(matrixPower_vector[2])
