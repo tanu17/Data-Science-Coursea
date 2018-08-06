@@ -84,6 +84,7 @@ def raise_power(M):
 
 def trace(M):
 	e=Ciphertext()
+	encryptor.encrypt("0", encrypted_data2)
 	for i in range(0,n):
 		evaluator.add(M[i][i],e)
 	return (e)
